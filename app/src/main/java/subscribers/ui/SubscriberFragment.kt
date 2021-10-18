@@ -6,6 +6,8 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import br.tecpuc.subscribers.R
+import subscribers.data.db.AppDatabase
+import subscribers.data.db.entity.SubscriberEntity
 
 class SubscriberFragment : Fragment() {
 
