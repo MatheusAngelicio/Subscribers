@@ -29,7 +29,6 @@ class SubscriberFragment : Fragment() {
                 val repository: SubscriberRepository = DatabaseDataSource(subscriberDAO)
                 return SubscriberViewModel(repository) as T
             }
-
         }
     }
 
@@ -48,10 +47,9 @@ class SubscriberFragment : Fragment() {
     }
 
 
-
     private fun observeViewModel() {
         viewModel.subscriberStateEventData.observe(viewLifecycleOwner) { subscriberState ->
-            when(subscriberState) {
+            when (subscriberState) {
                 is SubscriberViewModel.SubscriberState.Inserted -> {
                     clearFields()
                     hideKeyboard()
@@ -81,7 +79,7 @@ class SubscriberFragment : Fragment() {
             val name = input_name.text.toString()
             val email = input_email.text.toString()
 
-            viewModel.addSubscriber(name,email)
+            viewModel.addSubscriber(name, email)
         }
     }
 
