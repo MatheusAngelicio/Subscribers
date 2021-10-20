@@ -18,7 +18,7 @@ import subscribers.extensions.hideKeyboard
 import subscribers.repository.DatabaseDataSource
 import subscribers.repository.SubscriberRepository
 
-class SubscriberFragment : Fragment() {
+class SubscriberFragment : Fragment(R.layout.subscriber_fragment) {
 
     private val viewModel: SubscriberViewModel by viewModels {
         object : ViewModelProvider.Factory {
@@ -30,13 +30,6 @@ class SubscriberFragment : Fragment() {
                 return SubscriberViewModel(repository) as T
             }
         }
-    }
-
-    override fun onCreateView(
-        inflater: LayoutInflater, container: ViewGroup?,
-        savedInstanceState: Bundle?
-    ): View? {
-        return inflater.inflate(R.layout.subscriber_fragment, container, false)
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
