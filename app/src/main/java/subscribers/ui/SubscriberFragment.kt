@@ -9,6 +9,7 @@ import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider
+import androidx.navigation.fragment.findNavController
 import br.tecpuc.subscribers.R
 import com.google.android.material.snackbar.Snackbar
 import kotlinx.android.synthetic.main.subscriber_fragment.*
@@ -46,6 +47,11 @@ class SubscriberFragment : Fragment(R.layout.subscriber_fragment) {
                 is SubscriberViewModel.SubscriberState.Inserted -> {
                     clearFields()
                     hideKeyboard()
+                    requireView().requestFocus()
+
+
+
+                    findNavController().popBackStack()
                 }
             }
         }
