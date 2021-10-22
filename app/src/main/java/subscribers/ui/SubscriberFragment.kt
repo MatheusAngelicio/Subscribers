@@ -1,15 +1,14 @@
 package subscribers.ui
 
 import android.os.Bundle
-import android.view.LayoutInflater
 import android.view.View
-import android.view.ViewGroup
 import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.fragment.findNavController
+import androidx.navigation.fragment.navArgs
 import br.tecpuc.subscribers.R
 import com.google.android.material.snackbar.Snackbar
 import kotlinx.android.synthetic.main.subscriber_fragment.*
@@ -33,8 +32,17 @@ class SubscriberFragment : Fragment(R.layout.subscriber_fragment) {
         }
     }
 
+    private val args: SubscriberFragmentArgs by navArgs()
+
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+
+        args.subscriber?.let { subscriber ->
+            button_subscriber.text = getString(R.string.subscriber_button_update)
+            input_name.setText(subscriber.name)
+            input_email.setText(subscriber.email)
+
+        }
 
         observeViewModel()
         setListeners()
@@ -49,7 +57,12 @@ class SubscriberFragment : Fragment(R.layout.subscriber_fragment) {
                     hideKeyboard()
                     requireView().requestFocus()
 
+                    findNavController().popBackStack()
+                }
 
+                is SubscriberViewModel.SubscriberState.Updated -> {
+                    clearFields()
+                    hideKeyboard()
 
                     findNavController().popBackStack()
                 }
@@ -78,7 +91,7 @@ class SubscriberFragment : Fragment(R.layout.subscriber_fragment) {
             val name = input_name.text.toString()
             val email = input_email.text.toString()
 
-            viewModel.addSubscriber(name, email)
+            viewModel.addOrUpdateSubscriber(name, email, args.subscriber?.id ?: 0)
         }
     }
 
