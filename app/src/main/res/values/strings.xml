@@ -5,11 +5,16 @@
     <string name="subscriber_email_hint">E-mail</string>
     <string name="subscriber_name_hint">Subscriber\'s name</string>
     <string name="subscriber_button">Add</string>
+    <string name="subscriber_button_delete">delete</string>
     <string name="subscriber_button_update">Update</string>
     <string name="subscriber_title">Subscriber</string>
     <string name="subscriber_inserted_successfully">Subscriber was successfully inserted</string>
     <string name="subscriber_update_successfully">Subscriber was successfully updated</string>
+    <string name="subscriber_delete_successfully">Subscriber was successfully deleted</string>
+
     <string name="subscriber_error_to_insert">There was an error when inserting Subscriber</string>
+    <string name="subscriber_error_to_update">There was an error when updating Subscriber</string>
+    <string name="subscriber_error_to_delete">There was an error when deleting Subscriber</string>
 
     <!-- SubscriberList -->
     <string name="subscriberList_title">Subscriber List</string>

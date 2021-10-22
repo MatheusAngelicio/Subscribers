@@ -4,9 +4,9 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:padding="16dp"
     android:focusable="true"
     android:focusableInTouchMode="true"
+    android:padding="16dp"
     tools:context="subscribers.ui.SubscriberFragment">
 
     <com.google.android.material.textfield.TextInputLayout
@@ -21,6 +21,7 @@
             android:id="@+id/input_name"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:backgroundTint="@color/white"
             android:hint="@string/subscriber_name_hint"
             android:inputType="textCapSentences" />
     </com.google.android.material.textfield.TextInputLayout>
@@ -38,6 +39,7 @@
             android:id="@+id/input_email"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:backgroundTint="@color/white"
             android:hint="@string/subscriber_email_hint"
             android:inputType="textEmailAddress" />
 
@@ -52,6 +54,19 @@
         app:layout_constraintEnd_toEndOf="@+id/input_layout_email"
         app:layout_constraintStart_toStartOf="@+id/input_layout_email"
         app:layout_constraintTop_toBottomOf="@+id/input_layout_email" />
+
+    <Button
+        android:id="@+id/button_subscriber_delete"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="8dp"
+        android:backgroundTint="@color/red"
+        android:text="@string/subscriber_button_delete"
+        android:visibility="gone"
+        app:layout_constraintEnd_toEndOf="@+id/button_subscriber"
+        app:layout_constraintStart_toStartOf="@+id/button_subscriber"
+        app:layout_constraintTop_toBottomOf="@+id/button_subscriber"
+        tools:visibility="visible" />
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>

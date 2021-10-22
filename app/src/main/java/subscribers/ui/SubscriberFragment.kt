@@ -42,6 +42,8 @@ class SubscriberFragment : Fragment(R.layout.subscriber_fragment) {
             input_name.setText(subscriber.name)
             input_email.setText(subscriber.email)
 
+            button_subscriber_delete.visibility = View.VISIBLE
+
         }
 
         observeViewModel()
@@ -61,6 +63,13 @@ class SubscriberFragment : Fragment(R.layout.subscriber_fragment) {
                 }
 
                 is SubscriberViewModel.SubscriberState.Updated -> {
+                    clearFields()
+                    hideKeyboard()
+
+                    findNavController().popBackStack()
+                }
+
+                is SubscriberViewModel.SubscriberState.Deleted -> {
                     clearFields()
                     hideKeyboard()
 
@@ -92,6 +101,11 @@ class SubscriberFragment : Fragment(R.layout.subscriber_fragment) {
             val email = input_email.text.toString()
 
             viewModel.addOrUpdateSubscriber(name, email, args.subscriber?.id ?: 0)
+        }
+
+
+        button_subscriber_delete.setOnClickListener {
+            viewModel.deleteUser(args.subscriber?.id ?: 0)
         }
     }
 

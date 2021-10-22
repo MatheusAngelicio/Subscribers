@@ -49,7 +49,19 @@ class SubscriberViewModel(
             _subscriberStateEventData.value = SubscriberState.Updated
             _messageEventData.value = R.string.subscriber_update_successfully
         } catch (e: Exception) {
-            _messageEventData.value = R.string.subscriber_error_to_insert
+            _messageEventData.value = R.string.subscriber_error_to_update
+            Log.e(TAG, e.toString())
+        }
+    }
+
+    fun deleteUser(id: Long) = viewModelScope.launch {
+        try {
+            repository.deleteSubscriber(id)
+
+            _subscriberStateEventData.value = SubscriberState.Deleted
+            _messageEventData.value = R.string.subscriber_delete_successfully
+        } catch (e: Exception) {
+            _messageEventData.value = R.string.subscriber_error_to_delete
             Log.e(TAG, e.toString())
         }
     }
@@ -57,6 +69,7 @@ class SubscriberViewModel(
     sealed class SubscriberState {
         object Inserted : SubscriberState()
         object Updated : SubscriberState()
+        object Deleted : SubscriberState()
     }
 
     companion object {
