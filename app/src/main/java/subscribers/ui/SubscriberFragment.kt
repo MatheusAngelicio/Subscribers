@@ -54,24 +54,10 @@ class SubscriberFragment : Fragment(R.layout.subscriber_fragment) {
     private fun observeViewModel() {
         viewModel.subscriberStateEventData.observe(viewLifecycleOwner) { subscriberState ->
             when (subscriberState) {
-                is SubscriberViewModel.SubscriberState.Inserted -> {
+                is SubscriberViewModel.SubscriberState.Finish -> {
                     clearFields()
                     hideKeyboard()
                     requireView().requestFocus()
-
-                    findNavController().popBackStack()
-                }
-
-                is SubscriberViewModel.SubscriberState.Updated -> {
-                    clearFields()
-                    hideKeyboard()
-
-                    findNavController().popBackStack()
-                }
-
-                is SubscriberViewModel.SubscriberState.Deleted -> {
-                    clearFields()
-                    hideKeyboard()
 
                     findNavController().popBackStack()
                 }

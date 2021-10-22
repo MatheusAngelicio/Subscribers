@@ -33,7 +33,7 @@ class SubscriberViewModel(
         try {
             val id = repository.insertSubscriber(name, email)
             if (id > 0) {
-                _subscriberStateEventData.value = SubscriberState.Inserted
+                _subscriberStateEventData.value = SubscriberState.Finish
                 _messageEventData.value = R.string.subscriber_inserted_successfully
             }
         } catch (e: Exception) {
@@ -46,7 +46,7 @@ class SubscriberViewModel(
         try {
             repository.updateSubscriber(id, name, email)
 
-            _subscriberStateEventData.value = SubscriberState.Updated
+            _subscriberStateEventData.value = SubscriberState.Finish
             _messageEventData.value = R.string.subscriber_update_successfully
         } catch (e: Exception) {
             _messageEventData.value = R.string.subscriber_error_to_update
@@ -58,7 +58,7 @@ class SubscriberViewModel(
         try {
             repository.deleteSubscriber(id)
 
-            _subscriberStateEventData.value = SubscriberState.Deleted
+            _subscriberStateEventData.value = SubscriberState.Finish
             _messageEventData.value = R.string.subscriber_delete_successfully
         } catch (e: Exception) {
             _messageEventData.value = R.string.subscriber_error_to_delete
@@ -67,9 +67,7 @@ class SubscriberViewModel(
     }
 
     sealed class SubscriberState {
-        object Inserted : SubscriberState()
-        object Updated : SubscriberState()
-        object Deleted : SubscriberState()
+        object Finish : SubscriberState()
     }
 
     companion object {
