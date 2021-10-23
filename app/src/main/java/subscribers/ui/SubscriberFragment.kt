@@ -1,9 +1,7 @@
 package subscribers.ui
 
 import android.os.Bundle
-import android.view.LayoutInflater
-import android.view.View
-import android.view.ViewGroup
+import android.view.*
 import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
@@ -65,7 +63,7 @@ class SubscriberFragment : Fragment() {
         }
 
         binding.buttonSubscriberDelete.setOnClickListener {
-            viewModel.deleteUser(args.subscriber?.id ?: 0)
+            viewModel.deleteSubscriber(args.subscriber?.id ?: 0)
         }
     }
 

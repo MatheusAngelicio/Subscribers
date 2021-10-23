@@ -54,7 +54,7 @@ class SubscriberViewModel(
         }
     }
 
-    fun deleteUser(id: Long) = viewModelScope.launch {
+    fun deleteSubscriber(id: Long) = viewModelScope.launch {
         try {
             repository.deleteSubscriber(id)
 
