@@ -1,4 +1,4 @@
-package subscribers.ui.subscriberlist
+package subscribers.ui.subscriberlist.adapter
 
 import android.view.LayoutInflater
 import android.view.View

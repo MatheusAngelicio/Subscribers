@@ -1,25 +1,26 @@
 package subscribers.ui.subscriberlist
 
-import androidx.lifecycle.ViewModelProvider
 import android.os.Bundle
-import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.ViewModel
+import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.fragment.findNavController
 import br.tecpuc.subscribers.R
-import kotlinx.android.synthetic.main.subscriber_list_fragment.*
+import br.tecpuc.subscribers.databinding.SubscriberListFragmentBinding
 import subscribers.data.db.AppDatabase
 import subscribers.data.db.dao.SubscriberDAO
-import subscribers.data.db.entity.SubscriberEntity
 import subscribers.extensions.navigateWithAnimations
 import subscribers.repository.DatabaseDataSource
 import subscribers.repository.SubscriberRepository
-import subscribers.ui.SubscriberViewModel
+import subscribers.ui.subscriberlist.adapter.SubscriberListAdapter
 
-class SubscriberListFragment : Fragment(R.layout.subscriber_list_fragment) {
+class SubscriberListFragment : Fragment() {
+
+    private lateinit var binding: SubscriberListFragmentBinding
 
     private val viewModel: SubscriberListViewModel by viewModels {
         object : ViewModelProvider.Factory {
@@ -32,11 +33,25 @@ class SubscriberListFragment : Fragment(R.layout.subscriber_list_fragment) {
         }
     }
 
+    override fun onCreateView(
+        inflater: LayoutInflater,
+        container: ViewGroup?,
+        savedInstanceState: Bundle?
+    ): View? {
+        binding = SubscriberListFragmentBinding.inflate(layoutInflater)
+        return binding.root
+    }
+
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
         oberveViewModel()
         configureViewListeners()
+    }
+
+    override fun onResume() {
+        super.onResume()
+        viewModel.getSubscribers()
     }
 
     private fun oberveViewModel() {
@@ -49,25 +64,19 @@ class SubscriberListFragment : Fragment(R.layout.subscriber_list_fragment) {
                 }
             }
 
-            recycler_subscribers.run {
+            binding.recyclerSubscribers.run {
                 setHasFixedSize(true)
                 adapter = subscriberListAdapter
             }
         }
     }
 
-    override fun onResume() {
-        super.onResume()
-        viewModel.getSubscribers()
-    }
-
     private fun configureViewListeners() {
-        fabAddSubscriber.setOnClickListener {
+        binding.fabAddSubscriber.setOnClickListener {
             findNavController().navigateWithAnimations(
                 R.id.action_subscriberListFragment_to_subscriberFragment
             )
         }
     }
-
 
 }
