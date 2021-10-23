@@ -18,10 +18,11 @@
 
     <!-- SubscriberList -->
     <string name="subscriberList_title">Subscriber List</string>
-
-
-    <!-- TODO: Remove or change this placeholder text -->
     <string name="delete_subscriber">Delete</string>
     <string name="menu_search">search</string>
+    <string name="remove_all_subscribers">Remove all subscribers</string>
+    <string name="text_remove_all_subscribers">Do you really want to remove all subscribers?</string>
+    <string name="subscriber_removed_successfully">Subscribers successfully removed</string>
+    <string name="subscriber_removed_error">There was an error removing subscribers</string>
 
 </resources>

@@ -1,7 +1,10 @@
 package subscribers.ui.subscriberlist
 
+import android.content.Context
 import android.os.Bundle
 import android.view.*
+import android.widget.Toast
+import androidx.appcompat.app.AlertDialog
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.ViewModel
@@ -50,7 +53,21 @@ class SubscriberListFragment : Fragment() {
 
     override fun onCreateOptionsMenu(menu: Menu, inflater: MenuInflater) {
         inflater.inflate(R.menu.menu_search_advanced, menu)
+
+        val deleteMenu = menu.findItem(R.id.action_delete)
+
+        initMenus(deleteMenu)
+
+
         super.onCreateOptionsMenu(menu, inflater)
+    }
+
+    private fun initMenus(deleteMenu: MenuItem) {
+        deleteMenu.setOnMenuItemClickListener {
+            showDeleteAllSubscriberConfirmation(requireContext())
+            true
+        }
+
     }
 
     override fun onResume() {
@@ -73,6 +90,10 @@ class SubscriberListFragment : Fragment() {
                 adapter = subscriberListAdapter
             }
         }
+
+        viewModel.messageEventData.observe(viewLifecycleOwner) { stringResId ->
+            Toast.makeText(requireContext(), stringResId, Toast.LENGTH_LONG).show()
+        }
     }
 
     private fun configureViewListeners() {
@@ -81,6 +102,21 @@ class SubscriberListFragment : Fragment() {
                 R.id.action_subscriberListFragment_to_subscriberFragment
             )
         }
+    }
+
+    private fun showDeleteAllSubscriberConfirmation(context: Context) {
+        val builder = AlertDialog.Builder(context)
+
+        builder.setTitle(R.string.remove_all_subscribers)
+            .setMessage(R.string.text_remove_all_subscribers)
+            .setPositiveButton("Delete") { _, _ ->
+                viewModel.removeAllSubscribers()
+                viewModel.getSubscribers()
+
+            }.setNegativeButton("Cancel") { _, _ -> }
+
+        builder.create().show()
+
     }
 
 }
