@@ -7,11 +7,5 @@
         android:icon="@drawable/ic_baseline_delete_24"
         android:title="@string/delete_subscriber"
         app:showAsAction="ifRoom" />
-    <item
-        android:id="@+id/action_search"
-        android:icon="@android:drawable/ic_menu_search"
-        android:inputType="textCapCharacters"
-        app:showAsAction="always"
-        app:actionViewClass="androidx.appcompat.widget.SearchView"
-        android:title="@string/menu_search"/>
+    
 </menu>
